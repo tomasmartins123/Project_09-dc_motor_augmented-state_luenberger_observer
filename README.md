@@ -432,17 +432,17 @@ These equations represent the expected motor behaviour before any measurement co
 
 After receiving the encoder measurement, the observer computes the estimation error
 
-$$
+
 e[k]
 =
 y[k]-omega_hat[k].
-$$
+
 
 This error indicates the difference between the predicted motor speed and the measured physical speed.
 
 The observer then corrects both estimated states according to
 
-$$
+
 omega_hat[k+1]
 =
 A_d*omega_hat[k]
@@ -450,17 +450,16 @@ A_d*omega_hat[k]
 B_d(u[k]+d_hat[k])
 +
 L_1e[k]
-$$
+
 
 and
 
-$$
+
 d_hat[k+1]
 =
 d_hat[k]
 +
-L_2e[k].
-$$
+L_2e[k]
 
 Consequently, whenever the physical motor behaves differently from the mathematical model, the observer attributes part of the estimation error to an unknown disturbance acting on the system.
 
