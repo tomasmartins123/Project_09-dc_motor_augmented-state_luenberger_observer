@@ -213,15 +213,7 @@ Consequently, the observer continuously adapts itself to modelling errors while 
 
 The observer equations are
 
-$$
-hat{x}_a[k+1]
-=
-A_a*hat{x}_a[k]
-+
-B_a u[k]
-+
-L(y[k]-\hat{y}[k])
-$$
+<img src="https://latex.codecogs.com/svg.latex?%5Cdpi%7B150%7D%20%5Cfn_phv%20%5Chat%7Bx%7D_a%5Bk%2B1%5D%20%3D%20A_a%20%5Chat%7Bx%7D_a%5Bk%5D%20%2B%20B_a%20u%5Bk%5D%20%2B%20L%28y%5Bk%5D%20-%20%5Chat%7By%7D%5Bk%5D%29" alt="1. Augmented Observer"/><br/><br/>
 
 where
 
@@ -368,11 +360,7 @@ To reduce measurement noise before the observer correction stage, a first-order 
 The filtered speed is computed recursively as
 
 
-y_f[k]
-=
-alphaa*y[k]
-+
-(1-alpha)*y_f[k-1]
+<img src="https://latex.codecogs.com/svg.latex?%5Cdpi%7B150%7D%20%5Cfn_phv%20y_f%5Bk%5D%20%3D%20%5Calpha%20y%5Bk%5D%20%2B%20%281%20-%20%5Calpha%29%20y_f%5Bk-1%5D" alt="2. Measurement Filter"/><br/><br/>
 
 
 where
@@ -399,30 +387,17 @@ Using the identified discrete motor model, the observer first predicts the next 
 
 For the augmented system,
 
-$$
-x[k]
-=
-\begin{bmatrix}
-\omega[k]\\
-d[k]
-\end{bmatrix}
-$$
+<img src="https://latex.codecogs.com/svg.latex?%5Cdpi%7B150%7D%20%5Cfn_phv%20x%5Bk%5D%20%3D%20%5Cbegin%7Bbmatrix%7D%20%5Comega%5Bk%5D%20%5C%5C%20d%5Bk%5D%20%5Cend%7Bbmatrix%7D" alt="3. State Vector"/><br/><br/>
 
 the prediction equations become
 
 
-omega_hat^{-}[k+1]
-=
-A_d*omega_hat[k]
-+
-B_d(u[k]+d_hat[k])
+<img src="https://latex.codecogs.com/svg.latex?%5Cdpi%7B150%7D%20%5Cfn_phv%20%5Chat%7B%5Comega%7D%5E-%5Bk%2B1%5D%20%3D%20A_d%20%5Chat%7B%5Comega%7D%5Bk%5D%20%2B%20B_d%28u%5Bk%5D%20%2B%20%5Chat%7Bd%7D%5Bk%5D%29" alt="4. Speed Prediction"/><br/><br/>
 
 
 and
 
-$$
-d_(hat)^{-}[k+1]=0.97\,d_hat[k].
-$$
+<img src="https://latex.codecogs.com/svg.latex?%5Cdpi%7B150%7D%20%5Cfn_phv%20%5Chat%7Bd%7D%5E-%5Bk%2B1%5D%20%3D%200.97%20%5Chat%7Bd%7D%5Bk%5D" alt="5. Disturbance Prediction"/><br/><br/>
 
 These equations represent the expected motor behaviour before any measurement correction is applied.
 
@@ -433,7 +408,7 @@ These equations represent the expected motor behaviour before any measurement co
 After receiving the encoder measurement, the observer computes the estimation error
 
 
-e[k] = y[k]-omega_hat[k]
+<img src="https://latex.codecogs.com/svg.latex?%5Cdpi%7B150%7D%20%5Cfn_phv%20e%5Bk%5D%20%3D%20y%5Bk%5D%20-%20%5Chat%7B%5Comega%7D%5Bk%5D" alt="6. Estimation Error"/><br/><br/>
 
 
 This error indicates the difference between the predicted motor speed and the measured physical speed.
@@ -441,13 +416,13 @@ This error indicates the difference between the predicted motor speed and the me
 The observer then corrects both estimated states according to
 
 
-omega_hat[k+1] = A_d*omega_hat[k] + B_d(u[k] + d_hat[k]) + L_1e[k]
+<img src="https://latex.codecogs.com/svg.latex?%5Cdpi%7B150%7D%20%5Cfn_phv%20%5Chat%7B%5Comega%7D%5Bk%2B1%5D%20%3D%20A_d%20%5Chat%7B%5Comega%7D%5Bk%5D%20%2B%20B_d%28u%5Bk%5D%20%2B%20%5Chat%7Bd%7D%5Bk%5D%29%20%2B%20L_1%20e%5Bk%5D" alt="7. Speed Correction"/><br/><br/>
 
 
 and
 
 
-d_hat[k+1] = d_hat[k] + L_2e[k]
+<img src="https://latex.codecogs.com/svg.latex?%5Cdpi%7B150%7D%20%5Cfn_phv%20%5Chat%7Bd%7D%5Bk%2B1%5D%20%3D%200.98%20%5Chat%7Bd%7D%5Bk%5D%20%2B%20L_2%20e%5Bk%5D" alt="8. Disturbance Correction"/>
 
 Consequently, whenever the physical motor behaves differently from the mathematical model, the observer attributes part of the estimation error to an unknown disturbance acting on the system.
 
