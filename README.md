@@ -220,8 +220,9 @@ A_a\hat{x}_a[k]
 +
 B_a u[k]
 +
-L\left(y[k]-\hat{y}[k]\right)
+L(y[k]-\hat{y}[k])
 $$
+
 where
 
 $$
