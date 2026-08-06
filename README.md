@@ -370,9 +370,9 @@ The filtered speed is computed recursively as
 $$
 y_f[k]
 =
-\mathrm{alpha}\,y[k]
+alphaa\,y[k]
 +
-(1-\mathrm{alpha})\,y_f[k-1]
+(1-alpha)\,y_f[k-1]
 $$
 
 where
