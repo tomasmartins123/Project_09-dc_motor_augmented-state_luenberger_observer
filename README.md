@@ -1,6 +1,6 @@
 # Project 09: Real-Time Discrete State-Space Disturbance Observer
 
-This repository presents the design, implementation, and experimental validation of a real-time discrete state-space disturbance observer for DC motor speed estimation on a differential-drive robotic platform.
+This repository presents the design, implementation, and experimental validation of a real-time discrete state-space disturbance observer for DC motor speed estimation.
 
 Building upon the first-order motor models identified in **Project 08**, this project augments the system state to estimate unknown external disturbances acting on each motor. The observer executes in real time on an Arduino UNO, simultaneously estimating motor speed and equivalent input disturbances while compensating them through feedforward control.
 
@@ -87,16 +87,6 @@ d[k+1] &= d[k]
 \]
 
 where \(d[k]\) is assumed to vary slowly with time.
-
-In reality, additional unknown forces continuously modify the motor dynamics. 
-
-Instead of explicitly modeling every possible disturbance, an equivalent unknown input
-
-$$
-d[k]
-$$
-
-is introduced.
 
 The physical model therefore becomes
 
@@ -497,8 +487,6 @@ $$
 \hat d^{-}[k+1]=0.99\,\hat d[k].
 $$
 
-This small leakage term prevents the disturbance estimate from remaining permanently biased after temporary disturbances have disappeared, allowing the observer to gradually recover its nominal operating point.
-
 These equations represent the expected motor behaviour before any measurement correction is applied.
 
 ---
@@ -619,3 +607,17 @@ Once the external load is removed,
 These results demonstrate that the observer successfully identifies unknown disturbances in real time while maintaining accurate speed estimation.
 
 ![Observer Validation - External Disturbance](observer_validation2_plot.png)
+# Conclusions
+
+A real-time disturbance observer based on an augmented discrete state-space model was successfully implemented and experimentally validated.
+
+The observer accurately reconstructs the motor speed while estimating equivalent external disturbances in real time.
+
+Experimental results demonstrated that:
+
+- the estimated speed closely follows the measured encoder speed;
+- external disturbances are successfully detected;
+- feedforward compensation automatically increases the PWM command during wheel loading;
+- the disturbance estimate returns to its nominal value after the disturbance is removed.
+
+These results validate the proposed observer architecture and provide the foundation for future state-space control strategies.

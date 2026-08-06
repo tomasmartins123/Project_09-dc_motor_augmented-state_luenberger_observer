@@ -35,10 +35,30 @@ volatile unsigned long last_time_right = 0;
 float last_rpm_left = 0.0f;
 float last_rpm_right = 0.0f;
 
+
+// -----------------------------------------------------------------------------
+// First-order exponential low-pass filter coefficient.
+//
+// Encoder measurements contain quantization noise and small fluctuations.
+// Before entering the observer, the measured RPM is smoothed according to
+//
+//      y_f[k] = α·y[k] + (1-α)·y_f[k-1]
+//
+// where α controls the trade-off between responsiveness and noise reduction.
+// -----------------------------------------------------------------------------
+const float ALPHA = 0.30f;   
 float rpm_L_filtered = 0.0f;
 float rpm_R_filtered = 0.0f;
 
-const float ALPHA = 0.30f;   
+
+// -----------------------------------------------------------------------------
+// Disturbance Leakage Factor
+//
+// Prevents long-term drift of the disturbance estimate by slowly pulling it
+// back toward zero when no persistent disturbance is present.
+// -----------------------------------------------------------------------------
+const float DISTURBANCE_LEAKAGE = 0.97f;
+
 // -----------------------------------------------------------------------------
 // Experiment Parameters
 // -----------------------------------------------------------------------------
@@ -240,6 +260,14 @@ void loop() {
 
     }
 
+
+    // -------------------------------------------------------------------------
+    // First-order exponential low-pass filtering.
+    //
+    // The raw encoder measurement is filtered before being used by the observer.
+    // This reduces high-frequency measurement noise while preserving the overall
+    // motor dynamics.
+    // -------------------------------------------------------------------------
     rpm_L_filtered =
      ALPHA * rpm_L_avg +
       (1.0f - ALPHA) * rpm_L_filtered;
@@ -273,6 +301,7 @@ void loop() {
 
     }
 
+    // Same filtering procedure as the left motor.
     rpm_R_filtered =
       ALPHA * rpm_R_avg +
       (1.0f - ALPHA) * rpm_R_filtered;
@@ -284,8 +313,8 @@ void loop() {
   // Generate the observer validation input.
   //
   // 0 - 2 s  : Motor stopped
-  // 2 - 6 s  : Constant PWM step
-  // After 6 s: Motor stopped and experiment finished
+  // 2 - 18 s  : Constant PWM step
+  // After 18 s: Motor stopped and experiment finished
   // -------------------------------------------------------------------------
     int u_ref = 0;
 
@@ -295,17 +324,14 @@ void loop() {
 
     }
 
-    // -------------------------------------------------------------------------
     // 3. Left Disturbance Observer
     //
     // Observer equations:
     //
     //      x̂[k+1] = A·x̂[k] + B·(u+d̂) + L₁·e
-    //      d̂[k+1] = d̂[k] + L₂·e
-    //
-    // where:
-    //      e = y − x̂
-    // -------------------------------------------------------------------------
+    //      d̂[k+1] = λ·d̂[k] + L₂·e
+    // where λ is the disturbance leakage factor.
+
     float error_L = rpm_L_real - omega_hat_L;
 
     float omega_next_L =
@@ -313,8 +339,24 @@ void loop() {
       B_L * (u_applied_L + d_hat_L) +
       L1_L * error_L;
 
+
+    // -------------------------------------------------------------------------
+    // Disturbance state update.
+    //
+    // A small leakage factor (<1) is applied to the disturbance estimate:
+    //
+    //      d̂[k+1] = λ·d̂[k] + L₂·e
+    //
+    // instead of
+    //
+    //      d̂[k+1] = d̂[k] + L₂·e
+    //
+    // This prevents long-term drift caused by small persistent modelling errors
+    // or measurement offsets, allowing the disturbance estimate to slowly return
+    // toward zero when no external disturbance is present.
+    // -------------------------------------------------------------------------
     float d_next_L =
-      0.97f* d_hat_L +
+      DISTURBANCE_LEAKAGE* d_hat_L +
       L2_L * error_L;
 
     omega_hat_L = omega_next_L;
@@ -331,8 +373,9 @@ void loop() {
       B_R * (u_applied_R + d_hat_R) +
       L1_R * error_R;
 
+    // Same disturbance observer update as the left motor.
     float d_next_R =
-      0.97f * d_hat_R +
+      DISTURBANCE_LEAKAGE * d_hat_R +
       L2_R * error_R;
 
     omega_hat_R = omega_next_R;
