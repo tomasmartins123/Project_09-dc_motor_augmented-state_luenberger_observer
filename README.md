@@ -370,10 +370,11 @@ The filtered speed is computed recursively as
 $$
 y_f[k]
 =
-\alpha\,y[k]
+\mathrm{alpha}\,y[k]
 +
-(1-\alpha)\,y_f[k-1]
+(1-\mathrm{alpha})\,y_f[k-1]
 $$
+
 where
 
 - \(y[k]\) is the measured encoder speed,
