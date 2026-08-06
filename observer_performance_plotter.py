@@ -42,7 +42,7 @@ fig, (ax1, ax2, ax3) = plt.subplots(3, 1, figsize=(12, 10), sharex=True)
 ax1.scatter(
     time_sec,
     rpm_L_real,
-    color="indianred",
+    color="#0072BD",
     alpha=0.3,
     s=15,
     label="Encoder Measurement (Left)",
@@ -57,7 +57,7 @@ ax1.plot(
 ax1.scatter(
     time_sec,
     rpm_R_real,
-    color="mediumseagreen",
+    color="#D95319",
     alpha=0.3,
     s=15,
     label="Encoder Measurement (Right)",

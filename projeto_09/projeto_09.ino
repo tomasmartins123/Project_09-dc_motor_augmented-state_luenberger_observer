@@ -35,6 +35,10 @@ volatile unsigned long last_time_right = 0;
 float last_rpm_left = 0.0f;
 float last_rpm_right = 0.0f;
 
+float rpm_L_filtered = 0.0f;
+float rpm_R_filtered = 0.0f;
+
+const float ALPHA = 0.30f;   
 // -----------------------------------------------------------------------------
 // Experiment Parameters
 // -----------------------------------------------------------------------------
@@ -61,11 +65,11 @@ const float B_R = 0.225f;
 // -----------------------------------------------------------------------------
 // Luenberger Disturbance Observer Gains
 // -----------------------------------------------------------------------------
-const float L1_L =  -0.0400f;
-const float L2_L =  0.0196f;
+const float L1_L = 0.550f;
+const float L2_L = 0.110f;
 
-const float L1_R =  -0.0170f;
-const float L2_R =  0.0222f;
+const float L1_R = 0.573f;
+const float L2_R = 0.124f;
 
 // -----------------------------------------------------------------------------
 // Estimated States
@@ -236,7 +240,11 @@ void loop() {
 
     }
 
-    float rpm_L_real = rpm_L_avg;
+    rpm_L_filtered =
+     ALPHA * rpm_L_avg +
+      (1.0f - ALPHA) * rpm_L_filtered;
+
+    float rpm_L_real = rpm_L_filtered;
     last_rpm_left = rpm_L_real;
 
     // -------------------------------------------------------------------------
@@ -265,7 +273,11 @@ void loop() {
 
     }
 
-    float rpm_R_real = rpm_R_avg;
+    rpm_R_filtered =
+      ALPHA * rpm_R_avg +
+      (1.0f - ALPHA) * rpm_R_filtered;
+
+    float rpm_R_real = rpm_R_filtered;
     last_rpm_right = rpm_R_real;
        
   // -------------------------------------------------------------------------
