@@ -214,9 +214,9 @@ Consequently, the observer continuously adapts itself to modelling errors while 
 The observer equations are
 
 $$
-\hat{x}_a[k+1]
+hat{x}_a[k+1]
 =
-A_a\hat{x}_a[k]
+A_a*hat{x}_a[k]
 +
 B_a u[k]
 +
@@ -367,13 +367,13 @@ To reduce measurement noise before the observer correction stage, a first-order 
 
 The filtered speed is computed recursively as
 
-$$
+
 y_f[k]
 =
 alphaa*y[k]
 +
 (1-alpha)*y_f[k-1]
-$$
+
 
 where
 
@@ -400,28 +400,28 @@ Using the identified discrete motor model, the observer first predicts the next 
 For the augmented system,
 
 $$
-\hat{x}[k]
+x[k]
 =
 \begin{bmatrix}
-omega_hat[k]\\
-d_hat[k]
+\omega[k]\\
+d[k]
 \end{bmatrix}
 $$
 
 the prediction equations become
 
-$$
+
 omega_hat^{-}[k+1]
 =
 A_d*omega_hat[k]
 +
 B_d(u[k]+d_hat[k])
-$$
+
 
 and
 
 $$
-d_hat^{-}[k+1]=0.97\,d_hat[k].
+d_(hat)^{-}[k+1]=0.97\,d_hat[k].
 $$
 
 These equations represent the expected motor behaviour before any measurement correction is applied.
@@ -433,9 +433,7 @@ These equations represent the expected motor behaviour before any measurement co
 After receiving the encoder measurement, the observer computes the estimation error
 
 
-e[k]
-=
-y[k]-omega_hat[k].
+e[k] = y[k]-omega_hat[k]
 
 
 This error indicates the difference between the predicted motor speed and the measured physical speed.
@@ -443,23 +441,13 @@ This error indicates the difference between the predicted motor speed and the me
 The observer then corrects both estimated states according to
 
 
-omega_hat[k+1]
-=
-A_d*omega_hat[k]
-+
-B_d(u[k]+d_hat[k])
-+
-L_1e[k]
+omega_hat[k+1] = A_d*omega_hat[k] + B_d(u[k] + d_hat[k]) + L_1e[k]
 
 
 and
 
 
-d_hat[k+1]
-=
-d_hat[k]
-+
-L_2e[k]
+d_hat[k+1] = d_hat[k] + L_2e[k]
 
 Consequently, whenever the physical motor behaves differently from the mathematical model, the observer attributes part of the estimation error to an unknown disturbance acting on the system.
 
