@@ -214,15 +214,14 @@ Consequently, the observer continuously adapts itself to modelling errors while 
 The observer equations are
 
 $$
-\hat{x}[k+1]
+\hat{x}_a[k+1]
 =
-A_a\hat{x}[k]
+A_a\hat{x}_a[k]
 +
 B_a u[k]
 +
 L\left(y[k]-\hat{y}[k]\right)
 $$
-
 where
 
 $$
