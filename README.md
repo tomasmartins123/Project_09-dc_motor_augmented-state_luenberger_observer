@@ -370,9 +370,9 @@ The filtered speed is computed recursively as
 $$
 y_f[k]
 =
-alphaa\,y[k]
+alphaa*y[k]
 +
-(1-alpha)\,y_f[k-1]
+(1-alpha)*y_f[k-1]
 $$
 
 where
@@ -384,7 +384,7 @@ where
 For this project,
 
 $$
-\alpha=0.3
+alpha=0.3
 $$
 
 was selected experimentally as a compromise between measurement smoothness and observer responsiveness.
@@ -403,25 +403,25 @@ $$
 \hat{x}[k]
 =
 \begin{bmatrix}
-\hat\omega[k]\\
-\hat d[k]
+omega_hat[k]\\
+d_hat[k]
 \end{bmatrix}
 $$
 
 the prediction equations become
 
 $$
-\hat\omega^{-}[k+1]
+omega_hat^{-}[k+1]
 =
-A_d\hat\omega[k]
+A_d*omega_hat[k]
 +
-B_d(u[k]+\hat d[k])
+B_d(u[k]+d_hat[k])
 $$
 
 and
 
 $$
-\hat d^{-}[k+1]=0.97\,\hat d[k].
+d_hat^{-}[k+1]=0.97\,d_hat[k].
 $$
 
 These equations represent the expected motor behaviour before any measurement correction is applied.
@@ -435,7 +435,7 @@ After receiving the encoder measurement, the observer computes the estimation er
 $$
 e[k]
 =
-y[k]-\hat\omega[k].
+y[k]-omega_hat[k].
 $$
 
 This error indicates the difference between the predicted motor speed and the measured physical speed.
@@ -443,11 +443,11 @@ This error indicates the difference between the predicted motor speed and the me
 The observer then corrects both estimated states according to
 
 $$
-\hat\omega[k+1]
+omega_hat[k+1]
 =
-A_d\hat\omega[k]
+A_d*omega_hat[k]
 +
-B_d(u[k]+\hat d[k])
+B_d(u[k]+d_hat[k])
 +
 L_1e[k]
 $$
@@ -455,9 +455,9 @@ $$
 and
 
 $$
-\hat d[k+1]
+d_hat[k+1]
 =
-\hat d[k]
+d_hat[k]
 +
 L_2e[k].
 $$
