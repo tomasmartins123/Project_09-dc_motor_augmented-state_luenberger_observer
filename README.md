@@ -16,7 +16,6 @@ These disturbances may originate from:
 - Mechanical friction variations
 - Surface irregularities
 - Battery voltage fluctuations
-- Manufacturing differences between motors
 - Simplifications introduced during the identification process
 
 Because these effects cannot be directly measured, they appear as modelling errors that degrade controller performance.
@@ -79,12 +78,12 @@ To account for these effects, an augmented state representing an equivalent dist
 
 The augmented model becomes
 
-\[
+$$
 \begin{aligned}
 \omega[k+1] &= A\omega[k] + B(u[k]+d[k]) \\
 d[k+1] &= d[k]
 \end{aligned}
-\]
+$$
 
 where \(d[k]\) is assumed to vary slowly with time.
 
@@ -95,15 +94,6 @@ x[k+1]=A_dx[k]+B_d(u[k]+d[k])
 $$
 
 where the disturbance represents every effect not captured by the identified model.
-
-Examples include:
-
-- wheel loading
-- rolling resistance
-- changing friction
-- battery voltage variations
-- parameter uncertainty
-- external forces manually applied to the wheel
 
 ---
 
@@ -145,7 +135,7 @@ $$
 the implemented observer uses
 
 $$
-\hat d[k+1]=\lambda\,\hat d[k],
+\hat d[k+1]=\lambda\ \hat d[k],
 $$
 
 where
@@ -157,7 +147,7 @@ $$
 In this project, a leakage factor of
 
 $$
-\lambda = 0.99
+\lambda = 0.97
 $$
 
 was selected experimentally.
@@ -169,19 +159,18 @@ The augmented discrete model becomes
 $$
 \begin{aligned}
 \omega[k+1] &=A_d\omega[k]+B_d(u[k]+d[k])\\
-d[k+1] &=d[k]
+d[k+1] &=\lambda\ d[k]
 \end{aligned}
 $$
 
 or, in matrix form,
 
 $$
-x_a[k+1]
-=
+x_a[k+1]=
 \underbrace{
 \begin{bmatrix}
-A_d&B_d\\
-0&1
+A_d & B_d\\
+0 & \lambda
 \end{bmatrix}
 }_{A_a}
 x_a[k]
@@ -198,11 +187,10 @@ $$
 The output equation remains
 
 $$
-y[k]
-=
+y[k]=
 \underbrace{
 \begin{bmatrix}
-1&0
+1 & 0
 \end{bmatrix}
 }_{C_a}
 x_a[k]
@@ -230,7 +218,7 @@ $$
 =
 A_a\hat{x}[k]
 +
-B_au[k]
+B_a u[k]
 +
 L\left(y[k]-\hat{y}[k]\right)
 $$
@@ -322,9 +310,6 @@ The final observer gains used in this project were experimentally tuned to obtai
 
 The observer gains determine how aggressively the estimates are corrected after each encoder measurement.
 
-- \(L_1\) mainly controls how quickly the estimated speed follows the measured speed.
-- \(L_2\) controls how quickly the disturbance estimate adapts to modelling errors.
-
 Higher gains generally produce faster convergence but also increase sensitivity to measurement noise.
 
 ---
@@ -346,7 +331,6 @@ x[k+1]=0.833x[k]+0.225u[k]
 $$
 
 These identified parameters constitute the prediction model executed internally by the observer before measurement correction.
----
 
 # Arduino Implementation
 
@@ -370,53 +354,6 @@ The entire estimation process executes online, allowing the observer to continuo
 
 ---
 
-# Encoder Speed Measurement
-
-Motor speed is obtained using the M/T (Time-Interval) method introduced in Project 08.
-
-Instead of counting encoder pulses over a fixed sampling window, the elapsed time between consecutive encoder transitions is measured using hardware interrupts and the Arduino microsecond timer (`micros()`).
-
-Each encoder interrupt stores the elapsed interval
-
-$$
-\Delta t=t_{now}-t_{last}
-$$
-
-while transitions occurring within less than
-
-$$
-1000\ \mu s
-$$
-
-are discarded to reject electrical noise and signal bouncing.
-
-During every sampling interval, the average transition period is computed as
-
-$$
-\overline{\Delta t}
-=
-\frac{\sum \Delta t}{N}
-$$
-
-where \(N\) represents the number of valid encoder transitions measured during the current sampling window.
-
-Because CHANGE interrupts detect both rising and falling edges, a 20-slot encoder generates 40 transitions per wheel revolution.
-
-Motor speed is therefore calculated as
-
-$$
-RPM=
-\frac{60\times10^6}
-{40\cdot\overline{\Delta t}}
-=
-\frac{1\,500\,000}
-{\overline{\Delta t}}
-$$
-
-This method provides significantly higher speed resolution than conventional pulse counting, particularly at low rotational speeds.
-
----
-
 # Measurement Filtering
 
 Although the M/T method substantially improves encoder resolution, the measured speed still contains small fluctuations caused by
@@ -437,12 +374,11 @@ y_f[k]
 +
 (1-\alpha)\,y_f[k-1]
 $$
-
 where
 
 - \(y[k]\) is the measured encoder speed,
 - \(y_f[k]\) is the filtered measurement,
-- \(\alpha\) is the filter coefficient.
+- \(alpha\) is the filter coefficient.
 
 For this project,
 
@@ -484,7 +420,7 @@ $$
 and
 
 $$
-\hat d^{-}[k+1]=0.99\,\hat d[k].
+\hat d^{-}[k+1]=0.97\,\hat d[k].
 $$
 
 These equations represent the expected motor behaviour before any measurement correction is applied.
@@ -524,8 +460,6 @@ $$
 +
 L_2e[k].
 $$
-
-The gain \(L_1\) primarily adjusts the estimated motor speed, while \(L_2\) updates the estimated disturbance.
 
 Consequently, whenever the physical motor behaves differently from the mathematical model, the observer attributes part of the estimation error to an unknown disturbance acting on the system.
 
