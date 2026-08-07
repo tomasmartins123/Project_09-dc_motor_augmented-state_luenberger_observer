@@ -213,7 +213,11 @@ Consequently, the observer continuously adapts itself to modelling errors while 
 
 The observer equations are
 
-<img src="https://latex.codecogs.com/svg.latex?%5Cdpi%7B150%7D%20%5Cfn_phv%20%5Chat%7Bx%7D_a%5Bk%2B1%5D%20%3D%20A_a%20%5Chat%7Bx%7D_a%5Bk%5D%20%2B%20B_a%20u%5Bk%5D%20%2B%20L%28y%5Bk%5D%20-%20%5Chat%7By%7D%5Bk%5D%29" alt="1. Augmented Observer"/><br/><br/>
+<picture>
+    <source media="(prefers-color-scheme: dark)" srcset="https://latex.codecogs.com/svg.latex?%5Cdpi%7B150%7D%20%5Cfn_phv%20%5Ccolor%7BWhite%7D%20%5Chat%7Bx%7D_a%5Bk%2B1%5D%20%3D%20A_a%20%5Chat%7Bx%7D_a%5Bk%5D%20%2B%20B_a%20u%5Bk%5D%20%2B%20L%28y%5Bk%5D%20-%20%5Chat%7By%7D%5Bk%5D%29">
+    <source media="(prefers-color-scheme: light)" srcset="https://latex.codecogs.com/svg.latex?%5Cdpi%7B150%7D%20%5Cfn_phv%20%5Ccolor%7BBlack%7D%20%5Chat%7Bx%7D_a%5Bk%2B1%5D%20%3D%20A_a%20%5Chat%7Bx%7D_a%5Bk%5D%20%2B%20B_a%20u%5Bk%5D%20%2B%20L%28y%5Bk%5D%20-%20%5Chat%7By%7D%5Bk%5D%29">
+    <img src="https://latex.codecogs.com/svg.latex?%5Cdpi%7B150%7D%20%5Cfn_phv%20%5Ccolor%7BWhite%7D%20%5Chat%7Bx%7D_a%5Bk%2B1%5D%20%3D%20A_a%20%5Chat%7Bx%7D_a%5Bk%5D%20%2B%20B_a%20u%5Bk%5D%20%2B%20L%28y%5Bk%5D%20-%20%5Chat%7By%7D%5Bk%5D%29" alt="1. Modelo Aumentado Completo">
+  </picture><br/><br/>
 
 where
 
@@ -360,7 +364,11 @@ To reduce measurement noise before the observer correction stage, a first-order 
 The filtered speed is computed recursively as
 
 
-<img src="https://latex.codecogs.com/svg.latex?%5Cdpi%7B150%7D%20%5Cfn_phv%20y_f%5Bk%5D%20%3D%20%5Calpha%20y%5Bk%5D%20%2B%20%281%20-%20%5Calpha%29%20y_f%5Bk-1%5D" alt="2. Measurement Filter"/><br/><br/>
+<picture>
+    <source media="(prefers-color-scheme: dark)" srcset="https://latex.codecogs.com/svg.latex?%5Cdpi%7B150%7D%20%5Cfn_phv%20%5Ccolor%7BWhite%7D%20y_f%5Bk%5D%20%3D%20%5Calpha%20y%5Bk%5D%20%2B%20%281%20-%20%5Calpha%29%20y_f%5Bk-1%5D">
+    <source media="(prefers-color-scheme: light)" srcset="https://latex.codecogs.com/svg.latex?%5Cdpi%7B150%7D%20%5Cfn_phv%20%5Ccolor%7BBlack%7D%20y_f%5Bk%5D%20%3D%20%5Calpha%20y%5Bk%5D%20%2B%20%281%20-%20%5Calpha%29%20y_f%5Bk-1%5D">
+    <img src="https://latex.codecogs.com/svg.latex?%5Cdpi%7B150%7D%20%5Cfn_phv%20%5Ccolor%7BWhite%7D%20y_f%5Bk%5D%20%3D%20%5Calpha%20y%5Bk%5D%20%2B%20%281%20-%20%5Calpha%29%20y_f%5Bk-1%5D" alt="2. Filtro de Medição">
+  </picture><br/><br/>
 
 
 where
@@ -387,17 +395,29 @@ Using the identified discrete motor model, the observer first predicts the next 
 
 For the augmented system,
 
-<img src="https://latex.codecogs.com/svg.latex?%5Cdpi%7B150%7D%20%5Cfn_phv%20x%5Bk%5D%20%3D%20%5Cbegin%7Bbmatrix%7D%20%5Comega%5Bk%5D%20%5C%5C%20d%5Bk%5D%20%5Cend%7Bbmatrix%7D" alt="3. State Vector"/><br/><br/>
+<picture>
+    <source media="(prefers-color-scheme: dark)" srcset="https://latex.codecogs.com/svg.latex?%5Cdpi%7B150%7D%20%5Cfn_phv%20%5Ccolor%7BWhite%7D%20x%5Bk%5D%20%3D%20%5Cbegin%7Bbmatrix%7D%20%5Comega%5Bk%5D%20%5C%5C%20d%5Bk%5D%20%5Cend%7Bbmatrix%7D">
+    <source media="(prefers-color-scheme: light)" srcset="https://latex.codecogs.com/svg.latex?%5Cdpi%7B150%7D%20%5Cfn_phv%20%5Ccolor%7BBlack%7D%20x%5Bk%5D%20%3D%20%5Cbegin%7Bbmatrix%7D%20%5Comega%5Bk%5D%20%5C%5C%20d%5Bk%5D%20%5Cend%7Bbmatrix%7D">
+    <img src="https://latex.codecogs.com/svg.latex?%5Cdpi%7B150%7D%20%5Cfn_phv%20%5Ccolor%7BWhite%7D%20x%5Bk%5D%20%3D%20%5Cbegin%7Bbmatrix%7D%20%5Comega%5Bk%5D%20%5C%5C%20d%5Bk%5D%20%5Cend%7Bbmatrix%7D" alt="3. Vetor de Estado Aumentado">
+  </picture><br/><br/>
 
 the prediction equations become
 
 
-<img src="https://latex.codecogs.com/svg.latex?%5Cdpi%7B150%7D%20%5Cfn_phv%20%5Chat%7B%5Comega%7D%5E-%5Bk%2B1%5D%20%3D%20A_d%20%5Chat%7B%5Comega%7D%5Bk%5D%20%2B%20B_d%28u%5Bk%5D%20%2B%20%5Chat%7Bd%7D%5Bk%5D%29" alt="4. Speed Prediction"/><br/><br/>
+<picture>
+    <source media="(prefers-color-scheme: dark)" srcset="https://latex.codecogs.com/svg.latex?%5Cdpi%7B150%7D%20%5Cfn_phv%20%5Ccolor%7BWhite%7D%20%5Chat%7B%5Comega%7D%5E-%5Bk%2B1%5D%20%3D%20A_d%20%5Chat%7B%5Comega%7D%5Bk%5D%20%2B%20B_d%28u%5Bk%5D%20%2B%20%5Chat%7Bd%7D%5Bk%5D%29">
+    <source media="(prefers-color-scheme: light)" srcset="https://latex.codecogs.com/svg.latex?%5Cdpi%7B150%7D%20%5Cfn_phv%20%5Ccolor%7BBlack%7D%20%5Chat%7B%5Comega%7D%5E-%5Bk%2B1%5D%20%3D%20A_d%20%5Chat%7B%5Comega%7D%5Bk%5D%20%2B%20B_d%28u%5Bk%5D%20%2B%20%5Chat%7Bd%7D%5Bk%5D%29">
+    <img src="https://latex.codecogs.com/svg.latex?%5Cdpi%7B150%7D%20%5Cfn_phv%20%5Ccolor%7BWhite%7D%20%5Chat%7B%5Comega%7D%5E-%5Bk%2B1%5D%20%3D%20A_d%20%5Chat%7B%5Comega%7D%5Bk%5D%20%2B%20B_d%28u%5Bk%5D%20%2B%20%5Chat%7Bd%7D%5Bk%5D%29" alt="4. Predição da Velocidade">
+  </picture><br/><br/>
 
 
 and
 
-<img src="https://latex.codecogs.com/svg.latex?%5Cdpi%7B150%7D%20%5Cfn_phv%20%5Chat%7Bd%7D%5E-%5Bk%2B1%5D%20%3D%200.97%20%5Chat%7Bd%7D%5Bk%5D" alt="5. Disturbance Prediction"/><br/><br/>
+<picture>
+    <source media="(prefers-color-scheme: dark)" srcset="https://latex.codecogs.com/svg.latex?%5Cdpi%7B150%7D%20%5Cfn_phv%20%5Ccolor%7BWhite%7D%20%5Chat%7Bd%7D%5E-%5Bk%2B1%5D%20%3D%200.97%20%5Chat%7Bd%7D%5Bk%5D">
+    <source media="(prefers-color-scheme: light)" srcset="https://latex.codecogs.com/svg.latex?%5Cdpi%7B150%7D%20%5Cfn_phv%20%5Ccolor%7BBlack%7D%20%5Chat%7Bd%7D%5E-%5Bk%2B1%5D%20%3D%200.97%20%5Chat%7Bd%7D%5Bk%5D">
+    <img src="https://latex.codecogs.com/svg.latex?%5Cdpi%7B150%7D%20%5Cfn_phv%20%5Ccolor%7BWhite%7D%20%5Chat%7Bd%7D%5E-%5Bk%2B1%5D%20%3D%200.97%20%5Chat%7Bd%7D%5Bk%5D" alt="5. Predição da Perturbação">
+  </picture><br/><br/>
 
 These equations represent the expected motor behaviour before any measurement correction is applied.
 
@@ -407,8 +427,11 @@ These equations represent the expected motor behaviour before any measurement co
 
 After receiving the encoder measurement, the observer computes the estimation error
 
-
-<img src="https://latex.codecogs.com/svg.latex?%5Cdpi%7B150%7D%20%5Cfn_phv%20e%5Bk%5D%20%3D%20y%5Bk%5D%20-%20%5Chat%7B%5Comega%7D%5Bk%5D" alt="6. Estimation Error"/><br/><br/>
+<picture>
+    <source media="(prefers-color-scheme: dark)" srcset="https://latex.codecogs.com/svg.latex?%5Cdpi%7B150%7D%20%5Cfn_phv%20%5Ccolor%7BWhite%7D%20e%5Bk%5D%20%3D%20y%5Bk%5D%20-%20%5Chat%7B%5Comega%7D%5Bk%5D">
+    <source media="(prefers-color-scheme: light)" srcset="https://latex.codecogs.com/svg.latex?%5Cdpi%7B150%7D%20%5Cfn_phv%20%5Ccolor%7BBlack%7D%20e%5Bk%5D%20%3D%20y%5Bk%5D%20-%20%5Chat%7B%5Comega%7D%5Bk%5D">
+    <img src="https://latex.codecogs.com/svg.latex?%5Cdpi%7B150%7D%20%5Cfn_phv%20%5Ccolor%7BWhite%7D%20e%5Bk%5D%20%3D%20y%5Bk%5D%20-%20%5Chat%7B%5Comega%7D%5Bk%5D" alt="6. Erro de Estimação">
+  </picture><br/><br/>
 
 
 This error indicates the difference between the predicted motor speed and the measured physical speed.
@@ -416,13 +439,22 @@ This error indicates the difference between the predicted motor speed and the me
 The observer then corrects both estimated states according to
 
 
-<img src="https://latex.codecogs.com/svg.latex?%5Cdpi%7B150%7D%20%5Cfn_phv%20%5Chat%7B%5Comega%7D%5Bk%2B1%5D%20%3D%20A_d%20%5Chat%7B%5Comega%7D%5Bk%5D%20%2B%20B_d%28u%5Bk%5D%20%2B%20%5Chat%7Bd%7D%5Bk%5D%29%20%2B%20L_1%20e%5Bk%5D" alt="7. Speed Correction"/><br/><br/>
+<picture>
+    <source media="(prefers-color-scheme: dark)" srcset="https://latex.codecogs.com/svg.latex?%5Cdpi%7B150%7D%20%5Cfn_phv%20%5Ccolor%7BWhite%7D%20%5Chat%7B%5Comega%7D%5Bk%2B1%5D%20%3D%20A_d%20%5Chat%7B%5Comega%7D%5Bk%5D%20%2B%20B_d%28u%5Bk%5D%20%2B%20%5Chat%7Bd%7D%5Bk%5D%29%20%2B%20L_1%20e%5Bk%5D">
+    <source media="(prefers-color-scheme: light)" srcset="https://latex.codecogs.com/svg.latex?%5Cdpi%7B150%7D%20%5Cfn_phv%20%5Ccolor%7BBlack%7D%20%5Chat%7B%5Comega%7D%5Bk%2B1%5D%20%3D%20A_d%20%5Chat%7B%5Comega%7D%5Bk%5D%20%2B%20B_d%28u%5Bk%5D%20%2B%20%5Chat%7Bd%7D%5Bk%5D%29%20%2B%20L_1%20e%5Bk%5D">
+    <img src="https://latex.codecogs.com/svg.latex?%5Cdpi%7B150%7D%20%5Cfn_phv%20%5Ccolor%7BWhite%7D%20%5Chat%7B%5Comega%7D%5Bk%2B1%5D%20%3D%20A_d%20%5Chat%7B%5Comega%7D%5Bk%5D%20%2B%20B_d%28u%5Bk%5D%20%2B%20%5Chat%7Bd%7D%5Bk%5D%29%20%2B%20L_1%20e%5Bk%5D" alt="7. Correção da Velocidade">
+  </picture><br/><br/>
 
 
 and
 
 
-<img src="https://latex.codecogs.com/svg.latex?%5Cdpi%7B150%7D%20%5Cfn_phv%20%5Chat%7Bd%7D%5Bk%2B1%5D%20%3D%200.98%20%5Chat%7Bd%7D%5Bk%5D%20%2B%20L_2%20e%5Bk%5D" alt="8. Disturbance Correction"/>
+<picture>
+    <source media="(prefers-color-scheme: dark)" srcset="https://latex.codecogs.com/svg.latex?%5Cdpi%7B150%7D%20%5Cfn_phv%20%5Ccolor%7BWhite%7D%20%5Chat%7Bd%7D%5Bk%2B1%5D%20%3D%20%5Chat%7Bd%7D%5Bk%5D%20%2B%20L_2%20e%5Bk%5D">
+    <source media="(prefers-color-scheme: light)" srcset="https://latex.codecogs.com/svg.latex?%5Cdpi%7B150%7D%20%5Cfn_phv%20%5Ccolor%7BBlack%7D%20%5Chat%7Bd%7D%5Bk%2B1%5D%20%3D%20%5Chat%7Bd%7D%5Bk%5D%20%2B%20L_2%20e%5Bk%5D">
+    <img src="https://latex.codecogs.com/svg.latex?%5Cdpi%7B150%7D%20%5Cfn_phv%20%5Ccolor%7BWhite%7D%20%5Chat%7Bd%7D%5Bk%2B1%5D%20%3D%20%5Chat%7Bd%7D%5Bk%5D%20%2B%20L_2%20e%5Bk%5D" alt="8. Correção da Perturbação">
+  </picture><br/><br/>
+</p>
 
 Consequently, whenever the physical motor behaves differently from the mathematical model, the observer attributes part of the estimation error to an unknown disturbance acting on the system.
 
