@@ -548,4 +548,4 @@ Experimental results demonstrated that:
 - feedforward compensation automatically increases the PWM command during wheel loading;
 - the disturbance estimate returns to its nominal value after the disturbance is removed.
 
-These results validate the proposed observer architecture and provide the foundation for future state-space control strategies.
+Overall, the proposed observer improves the robustness of the identified motor model against modelling uncertainties and external disturbances, providing a solid foundation for future state-space feedback control and trajectory tracking applications.
