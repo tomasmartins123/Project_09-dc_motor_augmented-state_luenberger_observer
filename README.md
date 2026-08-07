@@ -1,4 +1,4 @@
-# Project 09: Real-Time Discrete State-Space Disturbance Observer
+# Project 09: DC motor Augmented State
 
 This repository presents the design, implementation, and experimental validation of a real-time discrete state-space disturbance observer for DC motor speed estimation.
 
@@ -450,11 +450,10 @@ and
 
 
 <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="https://latex.codecogs.com/svg.latex?%5Cdpi%7B150%7D%20%5Cfn_phv%20%5Ccolor%7BWhite%7D%20%5Chat%7Bd%7D%5Bk%2B1%5D%20%3D%20%5Chat%7Bd%7D%5Bk%5D%20%2B%20L_2%20e%5Bk%5D">
-    <source media="(prefers-color-scheme: light)" srcset="https://latex.codecogs.com/svg.latex?%5Cdpi%7B150%7D%20%5Cfn_phv%20%5Ccolor%7BBlack%7D%20%5Chat%7Bd%7D%5Bk%2B1%5D%20%3D%20%5Chat%7Bd%7D%5Bk%5D%20%2B%20L_2%20e%5Bk%5D">
-    <img src="https://latex.codecogs.com/svg.latex?%5Cdpi%7B150%7D%20%5Cfn_phv%20%5Ccolor%7BWhite%7D%20%5Chat%7Bd%7D%5Bk%2B1%5D%20%3D%20%5Chat%7Bd%7D%5Bk%5D%20%2B%20L_2%20e%5Bk%5D" alt="8. Correção da Perturbação">
-  </picture><br/><br/>
-</p>
+  <source media="(prefers-color-scheme: dark)" srcset="https://latex.codecogs.com/svg.latex?%5Cdpi%7B150%7D%20%5Cfn_phv%20%5Ccolor%7BWhite%7D%20%5Chat%7Bd%7D%5Bk%2B1%5D%20%3D%200.97%20%5Chat%7Bd%7D%5Bk%5D%20%2B%20L_2%20e%5Bk%5D">
+  <source media="(prefers-color-scheme: light)" srcset="https://latex.codecogs.com/svg.latex?%5Cdpi%7B150%7D%20%5Cfn_phv%20%5Ccolor%7BBlack%7D%20%5Chat%7Bd%7D%5Bk%2B1%5D%20%3D%200.97%20%5Chat%7Bd%7D%5Bk%5D%20%2B%20L_2%20e%5Bk%5D">
+  <img src="https://latex.codecogs.com/svg.latex?%5Cdpi%7B150%7D%20%5Cfn_phv%20%5Ccolor%7BWhite%7D%20%5Chat%7Bd%7D%5Bk%2B1%5D%20%3D%200.97%20%5Chat%7Bd%7D%5Bk%5D%20%2B%20L_2%20e%5Bk%5D" alt="8. Correção da Perturbação com Leakage">
+</picture>
 
 Consequently, whenever the physical motor behaves differently from the mathematical model, the observer attributes part of the estimation error to an unknown disturbance acting on the system.
 
